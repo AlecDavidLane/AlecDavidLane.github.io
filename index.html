@@ -3,1227 +3,559 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maintain AV | AI-Driven AV Maintenance</title>
+    <title>Connect AV - Remote Access for AV Professionals</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <style>
-        /* Font imports */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
         :root {
-            --primary-color: #0066CC;
-            --accent-color: #FF6B00;
-            --text-color: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --bg-color: #000000;
-            --bg-card: #111111;
-            --bg-dark: #0a0a0a;
-            --bg-light: #222222;
-            --padding-section: 100px 0;
+            --primary: #1E90FF;
+            --secondary: #FF8C00;
+            --dark: #121212;
+            --darker: #0A0A0A;
+            --light: #F8F9FA;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* Typography */
-        h1, h2, h3, h4, h5 {
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            margin-bottom: 1rem;
-        }
-        
-        h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-        
-        h2 {
-            font-size: 2.5rem;
-            letter-spacing: -0.01em;
-        }
-        
-        h3 {
-            font-size: 1.75rem;
-        }
-        
-        p {
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-        }
-        
-        .text-accent {
-            color: var(--accent-color);
-        }
-        
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 16px 32px;
-            background: var(--primary-color);
+            background-color: var(--dark);
             color: white;
-            border: none;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-radius: 2px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        .btn:hover {
-            background: #0052a3;
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(30, 144, 255, 0.3);
         }
-        
-        .btn-accent {
-            background: var(--accent-color);
-        }
-        
-        .btn-accent:hover {
-            background: #e05e00;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--text-color);
-        }
-        
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Header */
-        header {
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            transition: background 0.3s ease;
-        }
-        
-        header.scrolled {
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .btn-secondary {
+            background-color: var(--secondary);
             color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.3);
         }
-        
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        
-        .nav-link:hover {
-            color: white;
-        }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), var(--bg-color)),
-                        url('/api/placeholder/1600/900') center/cover no-repeat;
-            padding: 150px 0 100px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(to top, var(--bg-color), transparent);
-        }
-        
-        .hero-content {
-            max-width: 650px;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .hero-title {
-            margin-bottom: 1.5rem;
-        }
-        
-        .hero-description {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-        }
-        
-        .hero-cta {
-            display: flex;
-            gap: 20px;
-        }
-        
-        /* Features Section */
         .section {
-            padding: var(--padding-section);
-        }
-        
-        .section-heading {
-            text-align: left;
-            margin-bottom: 60px;
-            max-width: 800px;
-        }
-        
-        .section-title {
-            margin-bottom: 20px;
-        }
-        
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .stat-item {
-            border-left: 3px solid var(--accent-color);
-            padding-left: 20px;
-        }
-        
-        .stat-value {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            line-height: 1;
-        }
-        
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .feature-card {
-            background-color: var(--bg-card);
-            padding: 40px;
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        
-        .feature-title {
-            margin-bottom: 15px;
-        }
-        
-        /* How It Works */
-        .image-section {
-            background: var(--bg-dark);
-            padding: var(--padding-section);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .image-section-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .image-container {
-            position: relative;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        
-        .image-container img {
-            width: 100%;
-            height: auto;
-            vertical-align: middle;
-        }
-        
-        .image-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(0, 102, 204, 0.2), rgba(255, 107, 0, 0.2));
-        }
-        
-        .steps-list {
-            counter-reset: step;
-            list-style: none;
-        }
-        
-        .step-item {
-            display: flex;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        
-        .step-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .step-item::before {
-            counter-increment: step;
-            content: "0" counter(step);
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-right: 20px;
-        }
-        
-        .step-content h3 {
-            margin-bottom: 10px;
-        }
-        
-        /* Integrations */
-        .brands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 40px;
-            align-items: center;
-            margin-top: 60px;
-        }
-        
-        .brand-item {
-            padding: 20px;
-            background: var(--bg-light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .brand-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        .brand-item img {
-            max-width: 100%;
-            height: auto;
-            filter: grayscale(100%) brightness(150%);
-            transition: all 0.3s ease;
-        }
-        
-        .brand-item:hover img {
-            filter: grayscale(0%) brightness(100%);
-        }
-        
-        /* Testimonials */
-        .testimonial-container {
-            position: relative;
-            overflow: hidden;
-            margin-top: 60px;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .testimonial-card {
-            background: var(--bg-card);
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .testimonial-text {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .testimonial-text::before {
-            content: '"';
-            position: absolute;
-            top: -20px;
-            left: -10px;
-            font-size: 3rem;
-            color: var(--primary-color);
-            opacity: 0.3;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-        
-        .testimonial-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .testimonial-info h4 {
-            margin-bottom: 5px;
-        }
-        
-        .testimonial-info p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0;
-        }
-        
-        /* Target Audience */
-        .audience-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .audience-card {
-            background: var(--bg-card);
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .audience-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .audience-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        
-        .audience-title {
-            margin-bottom: 15px;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(to right, var(--primary-color), #004999);
             padding: 80px 0;
-            text-align: center;
         }
-        
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .cta-title {
-            margin-bottom: 20px;
-        }
-        
-        .cta-description {
-            margin-bottom: 30px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .form-container {
-            display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-            gap: 10px;
-        }
-        
-        .form-input {
-            flex: 1;
-            padding: 16px 20px;
-            border: none;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-        }
-        
-        .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .form-input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        /* FAQ */
-        .faq-container {
-            max-width: 800px;
-            margin: 60px auto 0;
-        }
-        
-        .faq-item {
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .faq-question {
-            padding: 20px 0;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        .faq-toggle {
-            width: 24px;
-            height: 24px;
-            position: relative;
-        }
-        
-        .faq-toggle::before,
-        .faq-toggle::after {
-            content: '';
-            position: absolute;
-            background: white;
+        .card {
+            background-color: var(--darker);
+            border-radius: 10px;
+            padding: 30px;
             transition: all 0.3s ease;
         }
-        
-        .faq-toggle::before {
-            width: 100%;
-            height: 2px;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
-        
-        .faq-toggle::after {
-            width: 2px;
-            height: 100%;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
+        .highlight {
+            color: var(--secondary);
+            font-weight: bold;
         }
-        
-        .faq-item.active .faq-toggle::after {
-            opacity: 0;
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        .faq-answer {
-            padding: 0 0 20px;
-            display: none;
-            color: var(--text-secondary);
-        }
-        
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--bg-dark);
-            padding: 80px 0 20px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr repeat(3, 1fr);
-            gap: 60px;
-        }
-        
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
+        .icon-circle {
+            background-color: rgba(30, 144, 255, 0.1);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-        
-        .footer-description {
-            margin-bottom: 30px;
-        }
-        
-        .footer-social {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
             justify-content: center;
+            margin-bottom: 16px;
+        }
+        .timeline-step {
+            position: relative;
+            padding-left: 50px;
+        }
+        .timeline-step:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
-            background: var(--bg-light);
-            transition: all 0.3s ease;
+            justify-content: center;
+            z-index: 1;
         }
-        
-        .social-icon:hover {
-            background: var(--primary-color);
+        .timeline-step:after {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 30px;
+            width: 2px;
+            height: calc(100% - 30px);
+            background-color: var(--primary);
+            z-index: 0;
         }
-        
-        .footer-title {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .timeline-step:last-child:after {
+            display: none;
         }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-link {
-            margin-bottom: 10px;
-        }
-        
-        .footer-link a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        
-        .footer-link a:hover {
+        .timeline-step span {
+            position: absolute;
+            left: 9px;
+            top: 5px;
             color: white;
+            font-weight: bold;
+            z-index: 2;
         }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 60px;
-            padding-top: 20px;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        input, select {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 4px;
         }
-        
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            h1 {
-                font-size: 3rem;
-            }
-            
-            h2 {
-                font-size: 2.2rem;
-            }
-            
-            .image-section-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .image-container {
-                order: -1;
-            }
-            
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.3);
         }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-            
-            .hero {
-                padding: 120px 0 80px;
-            }
-            
-            .hero-cta {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .form-container {
-                flex-direction: column;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
+        ::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header id="header">
-        <div class="container header-container">
-            <a href="#" class="logo">
-                <span>◆</span> Maintain AV
-            </a>
-            <nav class="nav-links">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#how-it-works" class="nav-link">How It Works</a>
-                <a href="#integrations" class="nav-link">Integrations</a>
-                <a href="#testimonials" class="nav-link">Testimonials</a>
-                <a href="#contact" class="btn btn-accent">Get Early Access</a>
+    <header class="py-4 border-b border-gray-800">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">
+                <span class="text-white">Connect</span><span class="text-blue-500">AV</span>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
+                <a href="#how-it-works" class="text-gray-300 hover:text-white transition">How It Works</a>
+                <a href="#benefits" class="text-gray-300 hover:text-white transition">Benefits</a>
+                <a href="#faq" class="text-gray-300 hover:text-white transition">FAQ</a>
             </nav>
+            <a href="#signup" class="btn-primary">Start Free Trial</a>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-subtitle">EXCLUSIVELY FOR AV INTEGRATORS</div>
-                <h1 class="hero-title">Turn Every Maintenance Contract Into a <span class="text-accent">Profit Powerhouse</span></h1>
-                <p class="hero-description">Maintain AV lets you manage 3X more clients with the same team, slash on-site visits by 67%, and resolve 93% of issues before clients even notice. All while charging premium rates for "AI-Enhanced" SLAs.</p>
-                <div class="hero-cta">
-                    <a href="#contact" class="btn btn-accent">Reserve Your Early Access</a>
-                    <a href="#how-it-works" class="btn btn-outline">See ROI Calculator</a>
+    <section class="section bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
+                    Work on any AV system from <span class="gradient-text">your own laptop</span>—as if you were there.
+                </h1>
+                <p class="text-xl text-gray-300 mb-8">
+                    Connect AV gives you direct access to client sites from your familiar environment. No more struggling with unfamiliar computers or missing software.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#signup" class="btn-secondary text-center">
+                        Start 14-Day Free Trial
+                    </a>
+                    <a href="#how-it-works" class="border border-gray-600 px-6 py-3 rounded-md text-center hover:bg-gray-800 transition">
+                        See How It Works
+                    </a>
                 </div>
-            </div>
-        </div>
-    </section><!-- SPECIFIC PAIN POINTS SECTION - NEW -->
-    <section class="section" style="padding-top: 60px;">
-        <div class="container">
-            <div class="section-heading">
-                <h2 class="section-title">Why AV Integrators <span class="text-accent">Need</span> This Now</h2>
-                <p>Traditional maintenance SLAs are becoming unsustainable in today's market. Our platform solves your three biggest challenges:</p>
-            </div>
-            
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3 class="feature-title">Razor-Thin Margins</h3>
-                    <p>When every service call costs you money and clients demand faster response times, profits disappear. Our platform reduces on-site visits by 67% while delivering FASTER resolution times.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👨‍💼</div>
-                    <h3 class="feature-title">Staffing Shortages</h3>
-                    <p>Finding qualified AV technicians is harder than ever, and training costs are soaring. Our AI-powered system lets your existing team handle 3X more clients without working nights and weekends.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⏱️</div>
-                    <h3 class="feature-title">Service Level Pressure</h3>
-                    <p>Clients demand faster response times and 24/7 support, but your team is already stretched thin. Our platform provides instant issue detection and automatic resolution, even at 3AM.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="section">
-        <div class="container">
-            <div class="stats-bar">
-                <div class="stat-item">
-                    <div class="stat-value">47<span class="text-accent">%</span></div>
-                    <div class="stat-label">Reduced Operational Costs</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">89<span class="text-accent">%</span></div>
-                    <div class="stat-label">Less System Downtime</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">93<span class="text-accent">%</span></div>
-                    <div class="stat-label">Issues Resolved Autonomously</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">24<span class="text-accent">/7</span></div>
-                    <div class="stat-label">Continuous Monitoring</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="section">
-        <div class="container">
-            <div class="section-heading">
-                <h2 class="section-title">Why Choose <span class="text-accent">Intelligent</span> AV Maintenance?</h2>
-                <p>Our platform combines AI, automation, and remote management to revolutionize how you maintain AV systems across your organization.</p>
-            </div>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h3 class="feature-title">Global Remote Management</h3>
-                    <p>Connect to and control any AV device worldwide, reducing costly site visits by 67% and slashing downtime to near-zero levels.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3 class="feature-title">Automated Deployment</h3>
-                    <p>Keep your AV systems updated with zero manual intervention, ensuring stability and security across your entire infrastructure.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛠️</div>
-                    <h3 class="feature-title">Predictive Maintenance</h3>
-                    <p>Detect and fix 93% of potential issues before they happen with our machine learning-powered diagnostics engine.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚙️</div>
-                    <h3 class="feature-title">Infrastructure as Code</h3>
-                    <p>Capture AV system settings as code, allowing for rapid recovery and automated configurations across multiple sites.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section id="how-it-works" class="image-section">
-        <div class="container">
-            <div class="section-heading">
-                <h2 class="section-title">The <span class="text-accent">Only</span> AV Maintenance Platform Designed Specifically for Integrators</h2>
-                <p>Unlike generic IT monitoring tools, Maintain AV understands the unique challenges of audiovisual systems and service contracts.</p>
-            </div>
-            
-            <div class="image-section-grid">
-                <div>
-                    <ul class="steps-list">
-                        <li class="step-item">
-                            <div class="step-content">
-                                <h3>White-Label & Resellable</h3>
-                                <p>Offer our platform as your own premium service. Create tiered SLA packages with different monitoring and response levels to maximize revenue.</p>
-                            </div>
-                        </li>
-                        <li class="step-item">
-                            <div class="step-content">
-                                <h3>AV-Specific, Not Generic IT</h3>
-                                <p>Our AI is trained on thousands of AV-specific issues and solutions. We understand video walls, DSPs, and control systems in ways generic IT tools never will.</p>
-                            </div>
-                        </li>
-                        <li class="step-item">
-                            <div class="step-content">
-                                <h3>Seamless Integration</h3>
-                                <p>Works with your existing ticketing system, PSA tools, and billing platform. No more double entry or manual reconciliation of service activities.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="image-container">
-                    <img src="/api/placeholder/800/600" alt="Maintain AV Dashboard">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ROI CALCULATOR SECTION - NEW -->
-    <section id="roi-calculator" class="section">
-        <div class="container">
-            <div class="section-heading">
-                <h2 class="section-title">What's Your <span class="text-accent">Revenue Potential?</span></h2>
-                <p>See exactly how much additional profit you could generate with our platform.</p>
-            </div>
-            
-            <div style="background: var(--bg-card); padding: 40px; border: 1px solid rgba(255, 255, 255, 0.05);">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                    <div>
-                        <h3 style="margin-bottom: 20px;">Your Inputs</h3>
-                        <div style="margin-bottom: 15px;">
-                            <label style="display: block; margin-bottom: 8px;">Current number of maintenance contracts:</label>
-                            <input type="number" value="25" style="width: 100%; padding: 10px; background: rgba(255, 255, 255, 0.1); border: none; color: white;">
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <label style="display: block; margin-bottom: 8px;">Average monthly revenue per contract:</label>
-                            <input type="number" value="1200" style="width: 100%; padding: 10px; background: rgba(255, 255, 255, 0.1); border: none; color: white;">
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <label style="display: block; margin-bottom: 8px;">Average cost to service each contract per month:</label>
-                            <input type="number" value="800" style="width: 100%; padding: 10px; background: rgba(255, 255, 255, 0.1); border: none; color: white;">
-                        </div>
-                        <button class="btn" style="width: 100%; margin-top: 20px;">Calculate Potential</button>
+                <div class="mt-6 flex items-center">
+                    <div class="mr-4 bg-blue-500 rounded-full p-1">
+                        <i class="fas fa-check text-white"></i>
                     </div>
-                    <div>
-                        <h3 style="margin-bottom: 20px;">Your Results</h3>
-                        <div style="background: rgba(0, 102, 204, 0.1); padding: 20px; margin-bottom: 20px; border-left: 3px solid var(--primary-color);">
-                            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 10px;">£30,000</div>
-                            <div>Additional Monthly Profit</div>
-                        </div>
-                        <div style="background: rgba(255, 107, 0, 0.1); padding: 20px; margin-bottom: 20px; border-left: 3px solid var(--accent-color);">
-                            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 10px;">75</div>
-                            <div>Total Contracts Manageable (3X Growth)</div>
-                        </div>
-                        <div style="background: rgba(0, 102, 204, 0.1); padding: 20px; margin-bottom: 20px; border-left: 3px solid var(--primary-color);">
-                            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 10px;">67%</div>
-                            <div>Reduction in Support Costs</div>
-                        </div>
-                    </div>
+                    <p class="text-gray-300">No credit card required</p>
                 </div>
+            </div>
+            <div class="md:w-1/2">
+                <img src="/api/placeholder/600/400" alt="AV technician working remotely" class="rounded-lg shadow-2xl">
             </div>
         </div>
     </section>
 
-    <!-- Integrations -->
-    <section id="integrations" class="section">
-        <div class="container">
-            <div class="section-heading">
-                <h2 class="section-title">Compatible With <span class="text-accent">All</span> Major AV Systems</h2>
-                <p>Our platform supports a wide range of industry-standard AV equipment and protocols, ensuring seamless integration with your existing infrastructure.</p>
-            </div>
-            <div class="brands-grid">
-                <div class="brand-item">
-                    <img src="/api/placeholder/120/60" alt="Crestron">
-                </div>
-                <div class="brand-item">
-                    <img src="/api/placeholder/120/60" alt="Extron">
-                </div>
-                <div class="brand-item">
-                    <img src="/api/placeholder/120/60" alt="AMX">
-                </div>
-                <div class="brand-item">
-                    <img src="/api/placeholder/120/60" alt="QSC">
-                </div>
-                <div class="brand-item">
-                    <img src="/api/placeholder/120/60" alt="Biamp">
-                </div>
-                <div class="brand-item">
-                    <img src="/api/placeholder/120/60" alt="Harman">
-                </div>
-                <div class="brand-item">
-                    <img src="/api/placeholder/120/60" alt="Barco">
-                </div>
-                <div class="brand-item">
-                    <img src="/api/placeholder/120/60" alt="Shure">
-                </div>
-            </div>
-        </div>
-    </section><!-- PRICING & PACKAGES - NEW -->
-    <section class="section" style="background: var(--bg-dark);">
-        <div class="container">
-            <div class="section-heading">
-                <h2 class="section-title">Early Access <span class="text-accent">Opportunity</span></h2>
-                <p>We're accepting a limited number of integration partners for our launch. Secure your position now.</p>
-            </div>
+    <!-- Problem Section -->
+    <section class="section bg-gray-900" id="problem">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Tired of These Remote Support <span class="text-orange-500">Frustrations?</span></h2>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
-                <div style="background: var(--bg-card); padding: 40px; border: 1px solid rgba(255, 255, 255, 0.05); position: relative; display: flex; flex-direction: column;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Innovator Partner</h3>
-                    <div style="color: var(--accent-color); font-size: 2.5rem; font-weight: 700; margin-bottom: 20px;">£999<span style="font-size: 1rem; color: var(--text-secondary);"> /month</span></div>
-                    <div style="margin-bottom: 30px; color: var(--text-secondary);">For integrators with 10-25 maintenance clients</div>
-                    <ul style="list-style: none; margin-bottom: 30px; flex-grow: 1;">
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            White-label platform with your branding
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Up to 25 client sites
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Unlimited devices per site
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            AI predictive maintenance
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Automated troubleshooting
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Email & chat support
-                        </li>
-                    </ul>
-                    <a href="#contact" class="btn btn-outline" style="width: 100%; text-align: center;">Reserve Your Spot</a>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <div class="text-red-500 text-4xl mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Unfamiliar Client Computers</h3>
+                    <p class="text-gray-400">Remoting into different client PCs means adjusting to their setup, hunting for software, and working with unfamiliar configurations every time.</p>
                 </div>
                 
-                <div style="background: var(--bg-card); padding: 40px; border: 2px solid var(--accent-color); position: relative; display: flex; flex-direction: column;">
-                    <div style="position: absolute; top: -15px; right: 30px; background: var(--accent-color); color: white; padding: 5px 15px; font-size: 0.9rem; font-weight: 600;">MOST POPULAR</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Growth Partner</h3>
-                    <div style="color: var(--accent-color); font-size: 2.5rem; font-weight: 700; margin-bottom: 20px;">£2,499<span style="font-size: 1rem; color: var(--text-secondary);"> /month</span></div>
-                    <div style="margin-bottom: 30px; color: var(--text-secondary);">For integrators with 25-75 maintenance clients</div>
-                    <ul style="list-style: none; margin-bottom: 30px; flex-grow: 1;">
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Everything in Innovator
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Up to 75 client sites
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            SLA template library
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            PSA/ticketing integration
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Client-facing portal
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Priority phone & email support
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Dedicated onboarding specialist
-                        </li>
-                    </ul>
-                    <a href="#contact" class="btn btn-accent" style="width: 100%; text-align: center;">Reserve Your Spot</a>
+                <div class="card">
+                    <div class="text-red-500 text-4xl mb-4">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Missing Software & Tools</h3>
+                    <p class="text-gray-400">Client computers often lack the specific tools and configurations you need, leading to frustrating workarounds and delays.</p>
                 </div>
                 
-                <div style="background: var(--bg-card); padding: 40px; border: 1px solid rgba(255, 255, 255, 0.05); position: relative; display: flex; flex-direction: column;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Enterprise Partner</h3>
-                    <div style="color: var(--accent-color); font-size: 2.5rem; font-weight: 700; margin-bottom: 20px;">Custom</div>
-                    <div style="margin-bottom: 30px; color: var(--text-secondary);">For integrators with 75+ maintenance clients</div>
-                    <ul style="list-style: none; margin-bottom: 30px; flex-grow: 1;">
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Everything in Growth
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Unlimited client sites
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Custom AI training for your equipment
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Advanced API access
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Custom integrations
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            Dedicated account manager
-                        </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 30px;">
-                            <span style="position: absolute; left: 0; color: var(--accent-color);">✓</span>
-                            24/7 priority support
-                        </li>
-                    </ul>
-                    <a href="#contact" class="btn btn-outline" style="width: 100%; text-align: center;">Contact Sales</a>
+                <div class="card">
+                    <div class="text-red-500 text-4xl mb-4">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Unnecessary Travel</h3>
+                    <p class="text-gray-400">Simple fixes often require on-site visits because traditional remote solutions aren't robust enough for AV systems.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="text-red-500 text-4xl mb-4">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Inconsistent Workflow</h3>
+                    <p class="text-gray-400">Different clients, different computers, different setups — forcing you to adjust your workflow for every support session.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="section" id="how-it-works">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">How Connect AV Works</h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">A secure, reliable connection to any client site directly from your own laptop in 3 simple steps.</p>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="timeline-step pb-16">
+                    <span>1</span>
+                    <div class="ml-10">
+                        <h3 class="text-2xl font-bold mb-2">Deploy Our Secure Gateway</h3>
+                        <p class="text-gray-400 mb-4">Install our small, secure gateway device at your client's location. It's plug-and-play and requires minimal configuration.</p>
+                        <div class="bg-gray-800 rounded-lg p-4 text-sm">
+                            <i class="fas fa-shield-alt text-blue-500 mr-2"></i>
+                            Uses WireGuard protocol for military-grade security
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-step pb-16">
+                    <span>2</span>
+                    <div class="ml-10">
+                        <h3 class="text-2xl font-bold mb-2">Connect From Your Laptop</h3>
+                        <p class="text-gray-400 mb-4">Launch the Connect AV application on your computer and select your client site. You'll instantly get direct access to their network.</p>
+                        <div class="bg-gray-800 rounded-lg p-4 text-sm">
+                            <i class="fas fa-laptop text-blue-500 mr-2"></i>
+                            Works on Windows, Mac, and Linux operating systems
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-step">
+                    <span>3</span>
+                    <div class="ml-10">
+                        <h3 class="text-2xl font-bold mb-2">Control Any Device, Using Your Own Tools</h3>
+                        <p class="text-gray-400 mb-4">Use the software and tools already installed on your laptop to configure, program, or troubleshoot any networked device at the client site.</p>
+                        <div class="bg-gray-800 rounded-lg p-4 text-sm">
+                            <i class="fas fa-tools text-blue-500 mr-2"></i>
+                            Compatible with all major AV programming and control software
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section bg-gray-900" id="benefits">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">Why AV Pros Love Connect AV</h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">The remote access solution designed specifically for audiovisual systems integrators.</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card">
+                    <div class="icon-circle">
+                        <i class="fas fa-laptop-house text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Use Your Own Environment</h3>
+                    <p class="text-gray-400">Work from your familiar laptop with all your tools, settings, and configurations ready to go.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="icon-circle">
+                        <i class="fas fa-shield-alt text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Secure Connections</h3>
+                    <p class="text-gray-400">WireGuard protocol creates encrypted tunnels that are both secure and highly performant.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="icon-circle">
+                        <i class="fas fa-tachometer-alt text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Fast Response Times</h3>
+                    <p class="text-gray-400">Respond to client issues immediately without travel or setup delays.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="icon-circle">
+                        <i class="fas fa-network-wired text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Access All Devices</h3>
+                    <p class="text-gray-400">Control any networked device at the client site, from displays to DSPs, control systems to cameras.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="icon-circle">
+                        <i class="fas fa-dollar-sign text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Reduce Travel Costs</h3>
+                    <p class="text-gray-400">Save thousands in travel expenses by handling routine maintenance and troubleshooting remotely.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="icon-circle">
+                        <i class="fas fa-thumbs-up text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Improve Client Satisfaction</h3>
+                    <p class="text-gray-400">Faster response times and quicker resolution of issues leads to happier clients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">The Impact of Connect AV</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="card text-center">
+                    <div class="text-4xl font-bold text-blue-500 mb-2">68%</div>
+                    <p class="text-gray-400">Reduction in on-site service visits</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-4xl font-bold text-blue-500 mb-2">85%</div>
+                    <p class="text-gray-400">Faster average response time</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-4xl font-bold text-blue-500 mb-2">$4,200</div>
+                    <p class="text-gray-400">Average monthly savings on travel costs</p>
                 </div>
             </div>
             
-            <div style="margin-top: 40px; text-align: center; padding: 30px; background: rgba(255, 107, 0, 0.1); border: 1px solid rgba(255, 107, 0, 0.2);">
-                <h3 style="margin-bottom: 15px; color: var(--accent-color);">Limited Time: Early Access Bonus</h3>
-                <p style="margin-bottom: 15px;">The first 20 partners to join will receive 3 months of free access to our implementation specialist team who will help you set up your first 5 customer sites.</p>
-                <div style="font-weight: 700; color: var(--accent-color);">Only 7 spots remaining!</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- OBJECTION HANDLING - NEW -->
-    <section class="section">
-        <div class="container">
-            <div class="section-heading">
-                <h2 class="section-title">Common <span class="text-accent">Questions</span></h2>
-                <p>Everything you need to know about transforming your maintenance services.</p>
-            </div>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        "Will this replace my technicians?"
-                        <div class="faq-toggle"></div>
+            <div class="bg-gray-800 rounded-lg p-8">
+                <div class="flex items-start">
+                    <div class="text-4xl text-orange-500 mr-4">
+                        <i class="fas fa-quote-left"></i>
                     </div>
-                    <div class="faq-answer">
-                        No. Our platform makes your technicians more productive and valuable, not replaceable. They'll spend less time on repetitive tasks and more time on high-value work that requires human expertise. Your best techs can support more clients, resulting in better service and higher margins.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        "How is this different from what we already do?"
-                        <div class="faq-toggle"></div>
-                    </div>
-                    <div class="faq-answer">
-                        Traditional AV maintenance is reactive and relies on truck rolls. Maintain AV is proactive and enables remote resolution. While you might already offer remote support, our AI-driven platform can predict failures before they happen and automatically fix issues without human intervention—even at 3AM when your team is sleeping.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        "How quickly will we see ROI?"
-                        <div class="faq-toggle"></div>
-                    </div>
-                    <div class="faq-answer">
-                        Most partners see positive ROI within the first month. The platform immediately reduces the need for on-site visits (saving travel time and costs) while allowing you to take on more maintenance contracts or charge premium rates for enhanced service. Our partners typically see a 5-10X return on their investment.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        "What systems does this work with?"
-                        <div class="faq-toggle"></div>
-                    </div>
-                    <div class="faq-answer">
-                        Our platform works with all major manufacturers including Crestron, Extron, AMX, QSC, Biamp, Shure, and many others. We support both IP-connected and serial-controlled devices through various gateway options. If you have legacy systems, we can work with you to develop appropriate monitoring solutions.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        "How do we sell this to our clients?"
-                        <div class="faq-toggle"></div>
-                    </div>
-                    <div class="faq-answer">
-                        We provide complete sales enablement materials including pre-built SLA templates, marketing collateral, and ROI calculators for your clients. You can position this as an "AI-Enhanced Service" that provides faster response times, better uptime, and more detailed system analytics—all things clients are willing to pay premium prices for.
+                    <div>
+                        <p class="text-xl italic mb-4">"Connect AV has completely transformed how we support our clients. I no longer have to remote into unfamiliar computers or deal with missing software. Now I can solve most issues right from my own laptop, using all my familiar tools."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-600 rounded-full mr-4"></div>
+                            <div>
+                                <div class="font-bold">Michael Rodriguez</div>
+                                <div class="text-gray-400 text-sm">Lead AV Technician, TechnoSolutions</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PREMIUM CTA - ENHANCED -->
-    <section id="contact" class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">Become an Early Access Partner</h2>
-                <p class="cta-description">Join the select group of forward-thinking AV integrators who are transforming their maintenance operations and dramatically increasing profitability.</p>
-                <form id="early-access-form" class="form-container">
-                    <input type="email" placeholder="Your work email" class="form-input" required style="flex: 2;">
-                    <input type="text" placeholder="Company name" class="form-input" required style="flex: 2;">
-                    <input type="text" placeholder="# of maintenance clients" class="form-input" required style="flex: 1;">
-                    <button type="submit" class="btn btn-accent">Reserve Your Spot</button>
-                </form>
-                <p style="margin-top: 20px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">By submitting, you'll secure a spot in our early access program and receive our "7 Ways to Double Your AV Maintenance Profits" guide immediately.</p>
+    <!-- FAQ Section -->
+    <section class="section bg-gray-900" id="faq">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+            
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">Is Connect AV secure?</h3>
+                    <p class="text-gray-400">Yes, Connect AV uses the WireGuard protocol, which provides state-of-the-art cryptography. All connections are encrypted end-to-end, and our gateway devices create secure tunnels that only allow authorized access.</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">Will I need IT approval to install this at client sites?</h3>
+                    <p class="text-gray-400">Usually yes, but we've designed Connect AV to be IT-friendly. Our gateway device connects to your client's network but doesn't modify their security settings. We also provide documentation to help explain the security protocols to IT departments.</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">How long does it take to set up?</h3>
+                    <p class="text-gray-400">Most installations take less than 30 minutes. The gateway is plug-and-play, and our team provides personal setup assistance for your first client site during the free trial period.</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">How is this different from TeamViewer or VNC?</h3>
+                    <p class="text-gray-400">Unlike traditional remote desktop solutions that only give you access to a specific computer, Connect AV gives you direct network access to all connected devices at the client site. This means you can use your own software to control displays, DSPs, control systems, and other AV equipment directly.</p>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-2">What happens after the 14-day trial?</h3>
+                    <p class="text-gray-400">After your trial, you can choose from our flexible pricing plans based on the number of client sites you need to access. We'll reach out before your trial ends to help you select the right plan, but there's no obligation to continue.</p>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Sign Up Form Section -->
+    <section class="section" id="signup">
+        <div class="container mx-auto px-4">
+            <div class="bg-gradient-to-r from-blue-900 to-blue-700 rounded-2xl p-8 md:p-12 max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-2 text-center">Start Your 14-Day Free Trial</h2>
+                <p class="text-center mb-8 text-blue-100">No credit card required. Connect to up to 3 client sites.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">You'll get:</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <div class="text-orange-500 mr-3 mt-1"><i class="fas fa-check-circle"></i></div>
+                                <div>Full access to all features for 14 days</div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="text-orange-500 mr-3 mt-1"><i class="fas fa-check-circle"></i></div>
+                                <div>Connection to up to 3 client sites</div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="text-orange-500 mr-3 mt-1"><i class="fas fa-check-circle"></i></div>
+                                <div>Personal setup assistance for your first site</div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="text-orange-500 mr-3 mt-1"><i class="fas fa-check-circle"></i></div>
+                                <div>Free "Remote AV Technician's Toolkit" ebook</div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="text-orange-500 mr-3 mt-1"><i class="fas fa-check-circle"></i></div>
+                                <div>Priority email and chat support</div>
+                            </li>
+                        </ul>
+                        
+                        <div class="mt-6 bg-blue-800 rounded-lg p-4 text-sm">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-stopwatch text-orange-500 mr-2"></i>
+                                <span class="font-bold">Limited Time Offer:</span>
+                            </div>
+                            <p>Only 20 spots left for personalized onboarding this month. Sign up now to secure your spot!</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <form class="space-y-4">
+                            <div>
+                                <label class="block mb-2 text-sm">Full Name</label>
+                                <input type="text" class="w-full" placeholder="John Smith">
+                            </div>
+                            
+                            <div>
+                                <label class="block mb-2 text-sm">Work Email</label>
+                                <input type="email" class="w-full" placeholder="john@yourcompany.com">
+                            </div>
+                            
+                            <div>
+                                <label class="block mb-2 text-sm">Company Name</label>
+                                <input type="text" class="w-full" placeholder="Your AV Company">
+                            </div>
+                            
+                            <div>
+                                <label class="block mb-2 text-sm">Number of Client Sites</label>
+                                <select class="w-full">
+                                    <option>1-5 sites</option>
+                                    <option>6-20 sites</option>
+                                    <option>21-50 sites</option>
+                                    <option>50+ sites</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn-secondary w-full">
+                                Start My Free Trial
+                            </button>
+                            
+                            <p class="text-sm text-center text-blue-200">By signing up, you agree to our terms of service and privacy policy.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section bg-gray-900">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to transform how you support your AV clients?</h2>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">Join the AV professionals who are saving time, reducing travel, and delighting clients with faster support.</p>
+            <a href="#signup" class="btn-primary inline-block">Get Started Today</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-logo">
-                        <span>◆</span> Maintain AV
+    <footer class="bg-black py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between mb-8">
+                <div class="mb-8 md:mb-0">
+                    <div class="text-2xl font-bold mb-4">
+                        <span class="text-white">Connect</span><span class="text-blue-500">AV</span>
                     </div>
-                    <p class="footer-description">Revolutionizing AV maintenance with AI-driven predictive technology and remote management.</p>
-                    <div class="footer-social">
-                        <a href="#" class="social-icon">Li</a>
-                        <a href="#" class="social-icon">Tw</a>
-                        <a href="#" class="social-icon">In</a>
+                    <p class="text-gray-400 max-w-xs">The remote access solution designed specifically for audiovisual professionals.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Product</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Features</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Pricing</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Security</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Case Studies</a></li>
+                        </ul>
                     </div>
-                </div>
-                <div>
-                    <h3 class="footer-title">Company</h3>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="#">About</a></li>
-                        <li class="footer-link"><a href="#">Team</a></li>
-                        <li class="footer-link"><a href="#">Careers</a></li>
-                        <li class="footer-link"><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="footer-title">Resources</h3>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="#">Documentation</a></li>
-                        <li class="footer-link"><a href="#">API</a></li>
-                        <li class="footer-link"><a href="#">Partners</a></li>
-                        <li class="footer-link"><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="footer-title">Legal</h3>
-                    <ul class="footer-links">
-                        <li class="footer-link"><a href="#">Privacy</a></li>
-                        <li class="footer-link"><a href="#">Terms</a></li>
-                        <li class="footer-link"><a href="#">Security</a></li>
-                    </ul>
+                    
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Resources</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Support</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Documentation</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Videos</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Company</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">About</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Terms</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Maintain AV. All rights reserved.</p>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-500 mb-4 md:mb-0">
+                    &copy; 2025 Connect AV. All rights reserved.
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
-
-    <script>
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        // FAQ toggle functionality
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                faqItem.classList.toggle('active');
-            });
-        });
-        
-        // Form submission
-        document.getElementById('early-access-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your interest! We will be in touch soon with early access information.');
-        });
-    </script>
 </body>
 </html>
